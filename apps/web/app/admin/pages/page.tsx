@@ -1,0 +1,4 @@
+'use client';import CrudPage from '../../../components/CrudPage';
+const parse=(v:any)=>{try{return typeof v==='string'?JSON.parse(v):v}catch{return {blocks:[{type:'text',text:String(v||'')}]} }};
+const stringify=(v:any)=>typeof v==='string'?v:JSON.stringify(v,null,2);
+export default function Pages(){return <CrudPage title="الصفحات والمحتوى" subtitle="تحرير صفحات المنصة ومحتواها من داخل لوحة التحكم" path="/admin/pages" fields={[{key:'slug',label:'Slug',required:true},{key:'title',label:'العنوان',required:true},{key:'content',label:'المحتوى JSON',type:'textarea',full:true},{key:'sortOrder',label:'الترتيب',type:'number'},{key:'published',label:'منشورة',type:'checkbox'}]} columns={[{key:'slug',label:'الرابط'},{key:'title',label:'العنوان'},{key:'published',label:'الحالة'},{key:'sortOrder',label:'الترتيب'}]} normalizeCreate={v=>({...v,content:parse(v.content)})} normalizeUpdate={v=>({...v,content:parse(v.content)})}/>}
